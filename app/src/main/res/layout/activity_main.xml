@@ -16,7 +16,7 @@
         android:background="#00FFFFFF"
         android:backgroundTint="#00FF0000"
         android:drawableTint="#FFFFFF"
-        android:text="texto"
+        android:text="hola"
         tools:layout_editor_absoluteX="181dp"
         tools:layout_editor_absoluteY="79dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
