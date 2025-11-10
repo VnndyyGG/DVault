@@ -15,6 +15,7 @@ class RegistroActivity : AppCompatActivity() {
     private lateinit var inputEmail: EditText
     private lateinit var inputPassword: EditText
     private lateinit var inputPais: EditText
+    private lateinit var inputTelefono: EditText // <-- CAMPO AÑADIDO
     private lateinit var btnRegistrar: Button
     private lateinit var tvYaTienesCuenta: TextView
 
@@ -22,7 +23,6 @@ class RegistroActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Asegúrate de usar el layout que tiene el campo 'inputPais'
         setContentView(R.layout.activity_registro)
 
         dbHelper = SQLiteHelper(this)
@@ -32,6 +32,7 @@ class RegistroActivity : AppCompatActivity() {
         inputEmail = findViewById(R.id.inputEmail)
         inputPassword = findViewById(R.id.inputPassword)
         inputPais = findViewById(R.id.inputPais)
+        inputTelefono = findViewById(R.id.inputTelefono) // <-- CAMPO AÑADIDO
         btnRegistrar = findViewById(R.id.btnRegistrar)
         tvYaTienesCuenta = findViewById(R.id.tvYaTienesCuenta)
 
@@ -40,18 +41,20 @@ class RegistroActivity : AppCompatActivity() {
             // 1. Obtener los textos
             val nombre = inputNombre.text.toString().trim()
             val email = inputEmail.text.toString().trim()
-            val password = inputPassword.text.toString() // No usamos .trim() aquí
+            val password = inputPassword.text.toString()
             val pais = inputPais.text.toString().trim()
+            val telefono = inputTelefono.text.toString().trim() // <-- CAMPO AÑADIDO
 
             // 2. Limpiar errores previos
             inputNombre.error = null
             inputEmail.error = null
             inputPassword.error = null
             inputPais.error = null
+            inputTelefono.error = null // <-- CAMPO AÑADIDO
 
             // --- 3. INICIO DE VALIDACIONES ---
 
-            // Validación de campos vacíos (Req: nombre y contraseña no nulos)
+            // Validación de campos vacíos
             if (nombre.isEmpty()) {
                 inputNombre.error = "El nombre no puede estar vacío"
                 inputNombre.requestFocus()
@@ -67,29 +70,28 @@ class RegistroActivity : AppCompatActivity() {
                 inputPais.requestFocus()
                 return@setOnClickListener
             }
+            if (telefono.isEmpty()) { // <-- CAMPO AÑADIDO
+                inputTelefono.error = "El teléfono no puede estar vacío"
+                inputTelefono.requestFocus()
+                return@setOnClickListener
+            }
             if (password.isEmpty()) {
                 inputPassword.error = "La contraseña no puede estar vacía"
                 inputPassword.requestFocus()
                 return@setOnClickListener
             }
 
-            // Validación de Contraseña (Req: 8 caracteres)
+            // Validación de Contraseña (tus reglas)
             if (password.length < 8) {
                 inputPassword.error = "Debe tener al menos 8 caracteres"
                 inputPassword.requestFocus()
                 return@setOnClickListener
             }
-
-            // Validación de Contraseña (Req: 1 Mayúscula)
-            // '.any { it.isUpperCase() }' significa "contiene al menos un carácter que es mayúscula"
             if (!password.any { it.isUpperCase() }) {
                 inputPassword.error = "Debe incluir al menos una mayúscula"
                 inputPassword.requestFocus()
                 return@setOnClickListener
             }
-
-            // Validación de Contraseña (Req: 1 Símbolo)
-            // '.any { !it.isLetterOrDigit() }' significa "contiene al menos un carácter que NO es letra NI número"
             if (!password.any { !it.isLetterOrDigit() }) {
                 inputPassword.error = "Debe incluir al menos un símbolo (ej: @, #, !)"
                 inputPassword.requestFocus()
@@ -98,8 +100,9 @@ class RegistroActivity : AppCompatActivity() {
 
             // --- 4. FIN DE VALIDACIONES ---
 
+            // --- LLAMADA CORREGIDA ---
             // Si todo está bien, insertar en la BD
-            val exito = dbHelper.insertarUsuario(nombre, email, password, pais)
+            val exito = dbHelper.insertarUsuario(nombre, email, password, pais, telefono) // <-- 'telefono' AÑADIDO
 
             if (exito != -1L) {
                 Toast.makeText(this, "Registro exitoso. Inicia sesión.", Toast.LENGTH_LONG).show()
@@ -117,7 +120,7 @@ class RegistroActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        dbHelper.close() // Cierra la conexión a la BD cuando la actividad se destruye
+        dbHelper.close()
         super.onDestroy()
     }
 }

@@ -20,7 +20,7 @@
         android:padding="8dp"
         android:scaleType="centerInside"
         android:src="@android:drawable/ic_menu_revert"
-        android:tint="#FFFFFF"
+        app:tint="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
