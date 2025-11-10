@@ -259,7 +259,7 @@
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:src="@android:drawable/ic_menu_camera"
-                                android:tint="#7E98A6" />
+                                app:tint="#7E98A6" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -306,5 +306,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
