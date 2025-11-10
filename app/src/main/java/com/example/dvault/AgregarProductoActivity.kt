@@ -27,17 +27,15 @@ class AgregarProductoActivity : AppCompatActivity() {
 
         dbHelper = SQLiteHelper(this)
 
-        // Obtener el ID del vendedor de SharedPreferences
         val sharedPref = getSharedPreferences("DVaultPrefs", MODE_PRIVATE)
         vendedorId = sharedPref.getInt("USUARIO_ID", -1)
 
         if (vendedorId == -1) {
             Toast.makeText(this, "Error: No se pudo identificar al vendedor", Toast.LENGTH_LONG).show()
-            finish() // Salir si no hay ID de vendedor
+            finish()
             return
         }
 
-        // Conectar Vistas
         inputNombre = findViewById(R.id.inputNombreProducto)
         inputMarca = findViewById(R.id.inputMarca)
         inputDesc = findViewById(R.id.inputDescripcion)
@@ -46,9 +44,8 @@ class AgregarProductoActivity : AppCompatActivity() {
         btnPublicar = findViewById(R.id.btnPublicar)
         btnBack = findViewById(R.id.btnBack)
 
-        // Configurar Botones
         btnBack.setOnClickListener {
-            finish() // Volver al menú
+            finish()
         }
 
         btnPublicar.setOnClickListener {
@@ -63,7 +60,6 @@ class AgregarProductoActivity : AppCompatActivity() {
         val precioStr = inputPrecio.text.toString().trim()
         val stockStr = inputStock.text.toString().trim()
 
-        // Validaciones
         if (nombre.isEmpty() || marca.isEmpty() || desc.isEmpty() || precioStr.isEmpty() || stockStr.isEmpty()) {
             Toast.makeText(this, "Por favor, rellena todos los campos", Toast.LENGTH_SHORT).show()
             return
@@ -82,12 +78,21 @@ class AgregarProductoActivity : AppCompatActivity() {
             return
         }
 
-        // Insertar en la Base de Datos
-        val success = dbHelper.insertarProducto(nombre, marca, desc, precio, stock, vendedorId)
+        // --- LLAMADA CORREGIDA ---
+        // Orden requerido por SQLiteHelper: (nombre, marca, precio, descripcion, imagen, vendedorId)
+        val success = dbHelper.insertarProducto(
+            nombre,
+            marca,
+            precio,     // 3. Double
+            desc,       // 4. String
+            "",         // 5. String (Imagen, requerido por la BD)
+            vendedorId
+        )
+        // -------------------------
 
         if (success != -1L) {
             Toast.makeText(this, "Producto publicado con éxito", Toast.LENGTH_LONG).show()
-            finish() // Volver al menú
+            finish()
         } else {
             Toast.makeText(this, "Error al publicar el producto", Toast.LENGTH_SHORT).show()
         }

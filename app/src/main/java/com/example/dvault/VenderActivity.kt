@@ -1,6 +1,5 @@
 package com.example.dvault
 
-// --- IMPORTS AÑADIDOS ---
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -14,8 +13,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import models.SQLiteHelper
 import java.io.File
 import java.io.FileOutputStream
@@ -23,7 +25,7 @@ import java.util.UUID
 
 class VenderActivity : AppCompatActivity() {
 
-    // --- Vistas ---
+    // Vistas
     private lateinit var inputMarca: EditText
     private lateinit var inputNombre: EditText
     private lateinit var inputDescripcion: EditText
@@ -32,9 +34,8 @@ class VenderActivity : AppCompatActivity() {
     private lateinit var btnSalir: Button
     private lateinit var containerFotos: LinearLayout
     private lateinit var btnBack: ImageButton
-    private lateinit var cardFotosContainer: CardView // <-- ID Correcto
+    private lateinit var cardFotosContainer: CardView
 
-    // --- Lógica ---
     private lateinit var dbHelper: SQLiteHelper
     private var vendedorId: Int = -1
     private val listaRutasImagenes = mutableListOf<String>()
@@ -68,6 +69,14 @@ class VenderActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vender)
 
+        // ✅ Ajustar padding para la barra de estado
+        val rootLayout = findViewById<ConstraintLayout>(R.id.rootLayout)
+        ViewCompat.setOnApplyWindowInsetsListener(rootLayout) { view, insets ->
+            val statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(0, statusBarInsets.top, 0, 0)
+            insets
+        }
+
         dbHelper = SQLiteHelper(this)
 
         val sharedPref = getSharedPreferences("DVaultPrefs", MODE_PRIVATE)
@@ -81,24 +90,21 @@ class VenderActivity : AppCompatActivity() {
 
         inicializarVistas()
         configurarBotones()
-        limpiarCampos() // Prepara el placeholder
+        limpiarCampos()
     }
 
-    // --- FUNCIÓN CORREGIDA ---
     private fun inicializarVistas() {
         btnBack = findViewById(R.id.btnBack)
         inputMarca = findViewById(R.id.inputMarca)
         inputNombre = findViewById(R.id.inputNombre)
         inputDescripcion = findViewById(R.id.inputDescripcion)
         inputPrecio = findViewById(R.id.inputPrecio)
-        // --- ID CORREGIDO ---
         cardFotosContainer = findViewById(R.id.cardFotosContainer)
         btnPublicar = findViewById(R.id.btnPublicar)
         btnSalir = findViewById(R.id.btnSalir)
         containerFotos = findViewById(R.id.containerFotos)
     }
 
-    // --- FUNCIÓN CORREGIDA ---
     private fun configurarBotones() {
         btnSalir.setOnClickListener {
             finish()
@@ -109,7 +115,6 @@ class VenderActivity : AppCompatActivity() {
         btnBack.setOnClickListener {
             finish()
         }
-        // --- ID CORREGIDO ---
         cardFotosContainer.setOnClickListener {
             if (listaRutasImagenes.size >= MAX_FOTOS) {
                 Toast.makeText(this, "Ya has alcanzado el límite de $MAX_FOTOS fotos", Toast.LENGTH_SHORT).show()
@@ -119,7 +124,7 @@ class VenderActivity : AppCompatActivity() {
         }
     }
 
-    // --- Copia la foto al almacenamiento interno ---
+    // Copia la foto al almacenamiento interno
     private fun guardarImagenEnAlmacenamientoInterno(uri: Uri): String {
         try {
             val inputStream = contentResolver.openInputStream(uri)
@@ -137,7 +142,7 @@ class VenderActivity : AppCompatActivity() {
         }
     }
 
-    // --- Añade una miniatura al ScrollView ---
+    //  Añade una miniatura al ScrollView
     private fun agregarMiniatura(uri: Uri) {
         val imageView = ImageView(this)
         val tamano = (90 * resources.displayMetrics.density).toInt() // 90dp
@@ -149,7 +154,7 @@ class VenderActivity : AppCompatActivity() {
         containerFotos.addView(imageView)
     }
 
-    // --- Guarda el producto en la BD ---
+    // Guarda el producto en la BD ---
     private fun publicarProducto() {
         val marca = inputMarca.text.toString().trim()
         val nombre = inputNombre.text.toString().trim()
@@ -164,20 +169,19 @@ class VenderActivity : AppCompatActivity() {
         val precio = precioStr.toDoubleOrNull()
         if (precio == null || precio <= 0) { inputPrecio.error = "Precio inválido"; return }
 
-        // --- CORRECCIÓN CRÍTICA: Guardar RUTAS ---
+        // ✅ Advertir si no hay fotos, pero permitir continuar
         if (listaRutasImagenes.isEmpty()) {
-            Toast.makeText(this, "Debes subir al menos una foto", Toast.LENGTH_SHORT).show()
-            return
+            Toast.makeText(this, "⚠️ Producto sin fotos", Toast.LENGTH_SHORT).show()
         }
+
         val imagenesString = listaRutasImagenes.joinToString(",")
-        // ----------------------------------------
 
         val resultado = dbHelper.insertarProducto(
             nombre = nombre,
             marca = marca,
             precio = precio,
             descripcion = descripcion,
-            imagen = imagenesString, // <-- Guardar el String de RUTAS
+            imagen = imagenesString, // Guardar el String de rutas (puede estar vacío)
             vendedorId = vendedorId
         )
 
@@ -189,8 +193,7 @@ class VenderActivity : AppCompatActivity() {
         }
     }
 
-    // --- FUNCIÓN CORREGIDA ---
-    // Limpia los campos y recrea el placeholder
+
     private fun limpiarCampos() {
         inputMarca.text.clear()
         inputNombre.text.clear()
@@ -198,15 +201,11 @@ class VenderActivity : AppCompatActivity() {
         inputPrecio.text.clear()
         listaRutasImagenes.clear()
         containerFotos.removeAllViews()
-
-        // --- Re-crear el placeholder dinámicamente (CORREGIDO) ---
-        // (Esto arregla los errores de 'Color.parseColor')
         val placeholderLayout = LinearLayout(this)
         val tamano = (90 * resources.displayMetrics.density).toInt()
         val params = LinearLayout.LayoutParams(tamano, tamano)
         params.marginEnd = (8 * resources.displayMetrics.density).toInt()
         placeholderLayout.layoutParams = params
-        // --- ERROR ARREGLADO ---
         placeholderLayout.setBackgroundColor(Color.parseColor("#1A2A3A")) // Fondo
         placeholderLayout.gravity = Gravity.CENTER
         placeholderLayout.orientation = LinearLayout.VERTICAL
@@ -215,7 +214,6 @@ class VenderActivity : AppCompatActivity() {
         val tamanoIcono = (40 * resources.displayMetrics.density).toInt()
         iconoCamara.layoutParams = LinearLayout.LayoutParams(tamanoIcono, tamanoIcono)
         iconoCamara.setImageResource(android.R.drawable.ic_menu_camera)
-        // --- ERROR ARREGLADO ---
         iconoCamara.setColorFilter(Color.parseColor("#7E98A6")) // Tint
 
         val textoAnadir = TextView(this)
@@ -224,7 +222,6 @@ class VenderActivity : AppCompatActivity() {
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         textoAnadir.text = "Añadir"
-        // --- ERROR ARREGLADO ---
         textoAnadir.setTextColor(Color.parseColor("#7E98A6"))
         textoAnadir.textSize = 11f
         textoAnadir.setPadding(0, (4 * resources.displayMetrics.density).toInt(), 0, 0)

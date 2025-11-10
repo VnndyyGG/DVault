@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.DVault" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:windowBackground">#0E2940</item>
-        <item name="android:colorPrimary">#8E8E93</item>
-        <item name="android:colorAccent">#8E8E93</item>
+    <style name="Theme.DVault" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">#0A1929</item>
+        <item name="colorPrimary">#5F5F5F</item> <item name="colorPrimaryVariant">#0F3246</item> <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorAccent">#D4AF37</item>
+
+        <item name="android:statusBarColor">#0A1929</item>
+    </style>
+
+    <style name="ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:backgroundTint">@null</item>
     </style>
 
 </resources>

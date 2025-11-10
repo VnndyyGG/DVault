@@ -88,7 +88,7 @@
             android:background="@drawable/btn_primary"
             android:letterSpacing="0.1"
             android:text="VENDER"
-            android:textColor="#D4AF37"
+            android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold" />
 
