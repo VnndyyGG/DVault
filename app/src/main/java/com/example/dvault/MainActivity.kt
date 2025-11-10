@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                     // Navegar al menú principal
                     val intent = Intent(this, MenuActivity::class.java)
                     startActivity(intent)
-                    finish() // Cierra el login para que no pueda volver con el botón atrás
+                    finish() 
 
                 } else {
                     // Contraseña incorrecta
