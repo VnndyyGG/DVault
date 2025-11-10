@@ -69,7 +69,7 @@ class VenderActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vender)
 
-        // ✅ Ajustar padding para la barra de estado
+        // Ajustar padding para la barra de estado
         val rootLayout = findViewById<ConstraintLayout>(R.id.rootLayout)
         ViewCompat.setOnApplyWindowInsetsListener(rootLayout) { view, insets ->
             val statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -154,14 +154,14 @@ class VenderActivity : AppCompatActivity() {
         containerFotos.addView(imageView)
     }
 
-    // Guarda el producto en la BD ---
+    // Guarda el producto en la base de datos
     private fun publicarProducto() {
         val marca = inputMarca.text.toString().trim()
         val nombre = inputNombre.text.toString().trim()
         val descripcion = inputDescripcion.text.toString().trim()
         val precioStr = inputPrecio.text.toString().trim()
 
-        // Validaciones...
+        // Validaciones
         if (marca.isEmpty()) { inputMarca.error = "Ingresa la marca"; return }
         if (nombre.isEmpty()) { inputNombre.error = "Ingresa el nombre"; return }
         if (descripcion.isEmpty()) { inputDescripcion.error = "Ingresa una descripción"; return }
@@ -169,7 +169,7 @@ class VenderActivity : AppCompatActivity() {
         val precio = precioStr.toDoubleOrNull()
         if (precio == null || precio <= 0) { inputPrecio.error = "Precio inválido"; return }
 
-        // ✅ Advertir si no hay fotos, pero permitir continuar
+        // Advertir si no hay fotos, pero permitir continuar
         if (listaRutasImagenes.isEmpty()) {
             Toast.makeText(this, "⚠️ Producto sin fotos", Toast.LENGTH_SHORT).show()
         }
@@ -181,7 +181,7 @@ class VenderActivity : AppCompatActivity() {
             marca = marca,
             precio = precio,
             descripcion = descripcion,
-            imagen = imagenesString, // Guardar el String de rutas (puede estar vacío)
+            imagen = imagenesString,
             vendedorId = vendedorId
         )
 
@@ -206,7 +206,7 @@ class VenderActivity : AppCompatActivity() {
         val params = LinearLayout.LayoutParams(tamano, tamano)
         params.marginEnd = (8 * resources.displayMetrics.density).toInt()
         placeholderLayout.layoutParams = params
-        placeholderLayout.setBackgroundColor(Color.parseColor("#1A2A3A")) // Fondo
+        placeholderLayout.setBackgroundColor(Color.parseColor("#1A2A3A"))
         placeholderLayout.gravity = Gravity.CENTER
         placeholderLayout.orientation = LinearLayout.VERTICAL
 
@@ -214,7 +214,7 @@ class VenderActivity : AppCompatActivity() {
         val tamanoIcono = (40 * resources.displayMetrics.density).toInt()
         iconoCamara.layoutParams = LinearLayout.LayoutParams(tamanoIcono, tamanoIcono)
         iconoCamara.setImageResource(android.R.drawable.ic_menu_camera)
-        iconoCamara.setColorFilter(Color.parseColor("#7E98A6")) // Tint
+        iconoCamara.setColorFilter(Color.parseColor("#7E98A6"))
 
         val textoAnadir = TextView(this)
         textoAnadir.layoutParams = LinearLayout.LayoutParams(

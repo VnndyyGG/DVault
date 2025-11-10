@@ -37,7 +37,6 @@ class CarritoActivity : AppCompatActivity() {
     private lateinit var btnEditar: TextView
     private lateinit var btnSiguiente: Button
 
-    // Costos
     private val PAIS_LOCAL = "Chile"
     private val COSTO_ENVIO_LOCAL = 5000.0
     private val COSTO_ENVIO_INTERNACIONAL = 25.0
@@ -175,7 +174,7 @@ class CarritoActivity : AppCompatActivity() {
         tvNombre.text = item.nombreProducto
         tvPrecio.text = formatoMoneda(item.precioProducto)
         tvCantidad.text = "Cantidad: ${item.cantidad}"
-        tvVendedor.visibility = View.GONE // Ocultamos el vendedor (ya está en el título)
+        tvVendedor.visibility = View.GONE
 
         // Cargar imagen
         val rutasImagenes = item.imagenProducto.split(",")
@@ -205,6 +204,7 @@ class CarritoActivity : AppCompatActivity() {
             Toast.makeText(this, "Error al eliminar", Toast.LENGTH_SHORT).show()
         }
     }
+    //cálculo de subtotal, costoEnvio, impuestos, etc.
 
     private fun actualizarResumenCostos(subtotal: Double, paisVendedor: String) {
         var costoEnvio: Double
@@ -223,6 +223,7 @@ class CarritoActivity : AppCompatActivity() {
             tvImpuestos.text = formatoMoneda(impuestos)
         }
 
+        //Costo total a pagar
         val total = subtotal + costoEnvio + impuestos
         tvSubtotal.text = formatoMoneda(subtotal)
         tvEnvio.text = formatoMoneda(costoEnvio)
@@ -240,6 +241,6 @@ class CarritoActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        cargarDatosDelCarrito() // Recargar cuando volvemos
+        cargarDatosDelCarrito()
     }
 }

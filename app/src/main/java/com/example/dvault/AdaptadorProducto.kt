@@ -44,8 +44,7 @@ class AdaptadorProducto(
         holder.tvUbicacion.text = "Santiago, Chile"
         holder.tvTalla.text = "TU" // Talla única
 
-        // Puedes cargar la imagen desde la ruta guardada
-        // Por ahora dejamos el placeholder
+
 
         // Click en agregar al carrito
         holder.btnAgregarCarrito.setOnClickListener {
@@ -54,7 +53,6 @@ class AdaptadorProducto(
 
         // Click en el producto completo (para ver detalles)
         holder.itemView.setOnClickListener {
-            // Aquí puedes abrir una actividad de detalle
         }
     }
 

@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:background="#0A1929">
 
-    <!-- Header -->
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -20,7 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Botón de retroceder bonito -->
         <ImageButton
             android:id="@+id/btnBack"
             android:layout_width="40dp"
@@ -54,7 +52,6 @@
             android:contentDescription="Carrito" />
     </LinearLayout>
 
-    <!-- RecyclerView para productos -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProductos"
         android:layout_width="match_parent"

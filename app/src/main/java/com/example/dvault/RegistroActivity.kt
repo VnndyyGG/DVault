@@ -70,7 +70,7 @@ class RegistroActivity : AppCompatActivity() {
                 inputPais.requestFocus()
                 return@setOnClickListener
             }
-            if (telefono.isEmpty()) { // <-- CAMPO AÑADIDO
+            if (telefono.isEmpty()) {
                 inputTelefono.error = "El teléfono no puede estar vacío"
                 inputTelefono.requestFocus()
                 return@setOnClickListener
@@ -98,10 +98,9 @@ class RegistroActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // --- 4. FIN DE VALIDACIONES ---
 
-            //Si todo está bien se insertar en la Base de datos
-            val exito = dbHelper.insertarUsuario(nombre, email, password, pais, telefono) // <-- 'telefono' AÑADIDO
+            //Si esta bien se inserta en la base de datos
+            val exito = dbHelper.insertarUsuario(nombre, email, password, pais, telefono)
 
             if (exito != -1L) {
                 Toast.makeText(this, "Registro exitoso. Inicia sesión.", Toast.LENGTH_LONG).show()
@@ -114,7 +113,7 @@ class RegistroActivity : AppCompatActivity() {
 
         // Ir al Login
         tvYaTienesCuenta.setOnClickListener {
-            finish() // Cierra esta actividad y vuelve al Login
+            finish()
         }
     }
 

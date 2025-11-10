@@ -10,5 +10,5 @@ data class CarritoItem(
     val titulo: String,
     val precioUnitario: Double,
     var cantidad: Int,
-    val imageUrl: String // (A futuro, para cargar la imagen)
+    val imageUrl: String
 )

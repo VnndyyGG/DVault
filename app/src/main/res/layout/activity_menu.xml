@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:background="#0A1929">
 
-    <!-- Gradiente decorativo superior -->
     <View
         android:id="@+id/topGradient"
         android:layout_width="0dp"
@@ -17,7 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Logo/Título -->
     <TextView
         android:id="@+id/tvLogo"
         android:layout_width="wrap_content"
@@ -33,7 +31,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Subtítulo -->
     <TextView
         android:id="@+id/tvSubtitle"
         android:layout_width="wrap_content"
@@ -48,7 +45,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvLogo" />
 
-    <!-- Contenedor de botones principales -->
     <LinearLayout
         android:id="@+id/mainButtonsContainer"
         android:layout_width="0dp"
@@ -79,7 +75,6 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <!-- Botón Vender -->
         <Button
             android:id="@+id/btnVender"
             android:layout_width="match_parent"
@@ -94,7 +89,6 @@
 
     </LinearLayout>
 
-    <!-- Contenedor de botones secundarios -->
     <LinearLayout
         android:id="@+id/secondaryButtonsContainer"
         android:layout_width="0dp"
@@ -108,7 +102,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mainButtonsContainer">
 
-        <!-- Botón Buscar -->
         <Button
             style="@style/ButtonStyle"
             android:id="@+id/btnBuscar"
@@ -124,7 +117,6 @@
             android:textSize="14sp"
             />
 
-        <!-- Botón Listar -->
         <Button
             android:id="@+id/btnListar"
             android:layout_width="0dp"
@@ -139,7 +131,6 @@
 
     </LinearLayout>
 
-    <!-- Botón Salir -->
     <Button
         android:id="@+id/btnSalir"
         android:layout_width="wrap_content"
@@ -156,7 +147,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Decoración inferior -->
     <View
         android:layout_width="0dp"
         android:layout_height="150dp"

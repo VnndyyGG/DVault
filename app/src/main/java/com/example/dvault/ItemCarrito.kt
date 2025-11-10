@@ -1,6 +1,5 @@
 package models
 
-//guardar los datos de la consulta JOIN del carrito
 data class ItemCarrito(
     val carritoId: Int,
     val cantidad: Int,

@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity() {
                 val userId = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
                 val userName = cursor.getString(cursor.getColumnIndexOrThrow("nombre"))
 
-                // --- CAMBIO AQUÍ ---
                 // Ahora obtenemos el país en lugar de 'esVendedor'
                 val pais = cursor.getString(cursor.getColumnIndexOrThrow("pais"))
 
@@ -59,14 +58,13 @@ class MainActivity : AppCompatActivity() {
                     // inicio de sesion exitoso
                     Toast.makeText(this, "¡Bienvenido $userName!", Toast.LENGTH_SHORT).show()
 
-                    // --- CAMBIO AQUÍ ---
                     // Guardar datos del usuario en SharedPreferences
                     val sharedPref = getSharedPreferences("DVaultPrefs", MODE_PRIVATE)
                     with(sharedPref.edit()) {
                         putInt("USUARIO_ID", userId)
                         putString("USUARIO_EMAIL", email)
                         putString("USUARIO_NOMBRE", userName)
-                        putString("USUARIO_PAIS", pais) // <-- Guardamos el país
+                        putString("USUARIO_PAIS", pais)
                         apply()
                     }
 

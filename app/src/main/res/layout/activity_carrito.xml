@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     android:background="#0A1929">
 
-    <!-- Header con título -->
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -49,7 +48,6 @@
             android:padding="8dp" />
     </LinearLayout>
 
-    <!-- Subtítulo cantidad de artículos -->
     <TextView
         android:id="@+id/tvCantidadArticulos"
         android:layout_width="match_parent"
@@ -63,7 +61,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- ScrollView para el contenido -->
     <ScrollView
         android:id="@+id/scrollContent"
         android:layout_width="match_parent"
@@ -79,7 +76,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Container donde se agregarán dinámicamente los productos por vendedor -->
             <LinearLayout
                 android:id="@+id/containerProductos"
                 android:layout_width="match_parent"
@@ -87,7 +83,6 @@
                 android:orientation="vertical"
                 android:padding="16dp" />
 
-            <!-- Información de envío -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -180,7 +175,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Resumen de costos -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -262,7 +256,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Contenedor inferior fijo -->
     <LinearLayout
         android:id="@+id/bottomContainer"
         android:layout_width="match_parent"
@@ -274,7 +267,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Total estimado -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -300,7 +292,6 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Botón SIGUIENTE -->
         <Button
             android:id="@+id/btnSiguiente"
             android:layout_width="match_parent"

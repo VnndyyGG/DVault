@@ -154,13 +154,11 @@ class ComprarActivity : AppCompatActivity(), AdaptadorProducto.AlPulsarProductoL
         Toast.makeText(this, "Productos de prueba agregados", Toast.LENGTH_SHORT).show()
     }
 
-    // --- Implementación del "Contrato" del Adaptador ---
-    // Esta función se llama cuando tocas el "+" en un producto
     override fun alPulsarAgregarAlCarrito(producto: Producto) {
         // Abrimos una nueva instancia del ayudante para esta acción
         val db = SQLiteHelper(this)
         val exito = db.agregarAlCarrito(idUsuario, producto.id, 1)
-        db.close() // Cerramos la conexión
+        db.close()
 
         if (exito != -1L) {
             Toast.makeText(this, "${producto.nombre} añadido al carrito", Toast.LENGTH_SHORT).show()
