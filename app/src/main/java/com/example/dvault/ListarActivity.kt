@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import models.Producto
@@ -22,6 +25,14 @@ class ListarActivity : AppCompatActivity(), AdaptadorProducto.AlPulsarProductoLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listar) // Usa tu 'activity_listar.xml'
+
+        // ✅ Ajustar padding para la barra de estado
+        val rootLayout = findViewById<ConstraintLayout>(R.id.rootLayout)
+        ViewCompat.setOnApplyWindowInsetsListener(rootLayout) { view, insets ->
+            val statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(0, statusBarInsets.top, 0, 0)
+            insets
+        }
 
         ayudanteBD = SQLiteHelper(this)
 

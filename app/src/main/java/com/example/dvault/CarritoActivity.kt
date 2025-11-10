@@ -11,7 +11,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import models.ItemCarrito // <-- Asegúrate de tener este 'data class'
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import models.ItemCarrito
 import models.SQLiteHelper
 import java.io.File
 import java.util.Locale
@@ -43,6 +46,14 @@ class CarritoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_carrito)
+
+        // ✅ Ajustar padding para la barra de estado
+        val rootLayout = findViewById<ConstraintLayout>(R.id.rootLayout)
+        ViewCompat.setOnApplyWindowInsetsListener(rootLayout) { view, insets ->
+            val statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(0, statusBarInsets.top, 0, 0)
+            insets
+        }
 
         ayudanteBD = SQLiteHelper(this)
 
@@ -131,11 +142,10 @@ class CarritoActivity : AppCompatActivity() {
         actualizarResumenCostos(subtotal, paisVendedor)
     }
 
-    // Esta es tu función que tenía el error
     private fun agregarSeccionVendedor(vendedor: String, productos: List<ItemCarrito>) {
         val inflater = LayoutInflater.from(this)
 
-        // Agregar card del vendedor (AHORA SÍ ENCUENTRA EL LAYOUT)
+        // Agregar card del vendedor
         val cardVendedor = inflater.inflate(R.layout.item_vendedor_carrito, containerProductos, false)
         val tvNombreVendedor = cardVendedor.findViewById<TextView>(R.id.tvNombreVendedor)
         tvNombreVendedor.text = "Vendido por: $vendedor"
@@ -147,10 +157,8 @@ class CarritoActivity : AppCompatActivity() {
         }
     }
 
-    // Esta es tu otra función que tenía el error
     private fun agregarProductoCard(item: ItemCarrito) {
         val inflater = LayoutInflater.from(this)
-        // (AHORA SÍ ENCUENTRA EL LAYOUT)
         val cardProducto = inflater.inflate(R.layout.item_producto_carrito, containerProductos, false)
 
         // Conectar vistas del 'item_producto_carrito.xml'
