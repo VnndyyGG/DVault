@@ -9,26 +9,27 @@ import androidx.recyclerview.widget.RecyclerView
 import models.Producto
 import models.SQLiteHelper
 
+// Esta pantalla también usa el AdaptadorProducto
 class ListarActivity : AppCompatActivity(), AdaptadorProducto.AlPulsarProductoListener {
 
-    private lateinit var recyclerHistorial: RecyclerView
+    private lateinit var listaVisualMisArticulos: RecyclerView
     private lateinit var adaptadorProductos: AdaptadorProducto
-    private val listaProductos = mutableListOf<Producto>()
+    private val listaMisProductos = mutableListOf<Producto>()
 
-    private lateinit var dbHelper: SQLiteHelper
-    private var usuarioId: Int = -1
+    private lateinit var ayudanteBD: SQLiteHelper
+    private var idVendedor: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_listar)
+        setContentView(R.layout.activity_listar) // Usa tu 'activity_listar.xml'
 
-        dbHelper = SQLiteHelper(this)
+        ayudanteBD = SQLiteHelper(this)
 
-        // Obtener ID del usuario
-        val sharedPref = getSharedPreferences("DVaultPrefs", MODE_PRIVATE)
-        usuarioId = sharedPref.getInt("USUARIO_ID", -1)
+        // Obtener ID del usuario (que es el vendedor)
+        val preferencias = getSharedPreferences("DVaultPrefs", MODE_PRIVATE)
+        idVendedor = preferencias.getInt("USUARIO_ID", -1)
 
-        if (usuarioId == -1) {
+        if (idVendedor == -1) {
             Toast.makeText(this, "Error de sesión de usuario", Toast.LENGTH_SHORT).show()
             finish()
             return
@@ -36,29 +37,31 @@ class ListarActivity : AppCompatActivity(), AdaptadorProducto.AlPulsarProductoLi
 
         inicializarVistas()
         configurarRecyclerView()
-        cargarHistorial()
+        cargarMisProductos()
     }
 
     private fun inicializarVistas() {
-        val btnBack = findViewById<ImageButton>(R.id.btnBack)
-        recyclerHistorial = findViewById(R.id.recyclerViewMisArticulos) // ← ID correcto del XML
+        val btnVolver = findViewById<ImageButton>(R.id.btnBack)
+        listaVisualMisArticulos = findViewById(R.id.recyclerViewMisArticulos)
 
-        btnBack.setOnClickListener {
+        btnVolver.setOnClickListener {
             finish()
         }
     }
 
     private fun configurarRecyclerView() {
-        recyclerHistorial.layoutManager = GridLayoutManager(this, 2)
-        adaptadorProductos = AdaptadorProducto(this, listaProductos, this)
-        recyclerHistorial.adapter = adaptadorProductos
+        listaVisualMisArticulos.layoutManager = GridLayoutManager(this, 2)
+        // Reutilizamos el adaptador
+        adaptadorProductos = AdaptadorProducto(this, listaMisProductos, this)
+        listaVisualMisArticulos.adapter = adaptadorProductos
     }
 
-    private fun cargarHistorial() {
-        listaProductos.clear()
+    private fun cargarMisProductos() {
+        listaMisProductos.clear()
 
-        // Obtener productos del carrito (historial)
-        val cursor = dbHelper.obtenerProductosCarrito(usuarioId)
+        // --- LÓGICA CORREGIDA ---
+        // Usamos la función para obtener productos por el ID del vendedor
+        val cursor = ayudanteBD.obtenerProductosPorVendedor(idVendedor)
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
@@ -71,27 +74,28 @@ class ListarActivity : AppCompatActivity(), AdaptadorProducto.AlPulsarProductoLi
                     imagen = cursor.getString(cursor.getColumnIndexOrThrow("producto_imagen")),
                     vendedorId = cursor.getInt(cursor.getColumnIndexOrThrow("vendedor_id"))
                 )
-
-                // Evitar duplicados
-                if (!listaProductos.any { it.id == producto.id }) {
-                    listaProductos.add(producto)
-                }
+                listaMisProductos.add(producto)
             } while (cursor.moveToNext())
 
             cursor.close()
         }
 
-        dbHelper.close()
+        ayudanteBD.close()
 
-        if (listaProductos.isEmpty()) {
-            Toast.makeText(this, "No tienes productos en tu historial", Toast.LENGTH_SHORT).show()
+        if (listaMisProductos.isEmpty()) {
+            Toast.makeText(this, "Aún no has publicado productos", Toast.LENGTH_SHORT).show()
         }
 
         adaptadorProductos.notifyDataSetChanged()
     }
 
+    // --- Implementación de la Interfaz ---
+
     override fun alPulsarAgregarAlCarrito(producto: Producto) {
-        // Ya están en el carrito, así que solo mostramos un mensaje
-        Toast.makeText(this, "Este producto ya está en tu carrito", Toast.LENGTH_SHORT).show()
+        // Como son TUS propios productos, no puedes agregarlos a TU carrito.
+        // (En el futuro, aquí podríamos abrir una pantalla para "Editar" o "Eliminar" el producto)
+        Toast.makeText(this, "No puedes comprar tus propios productos", Toast.LENGTH_SHORT).show()
     }
+
+    // (alPulsarTarjetaProducto se maneja dentro del adaptador y abre el detalle)
 }

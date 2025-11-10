@@ -3,6 +3,7 @@ package com.example.dvault
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -10,7 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import models.ItemCarrito // Asegúrate de tener este 'data class'
+import models.ItemCarrito // <-- Asegúrate de tener este 'data class'
 import models.SQLiteHelper
 import java.io.File
 import java.util.Locale
@@ -19,28 +20,25 @@ class CarritoActivity : AppCompatActivity() {
 
     private lateinit var ayudanteBD: SQLiteHelper
     private var idUsuario: Int = -1
-    private var paisUsuario: String = "Chile" // País del COMPRADOR
+    private var paisUsuario: String = "Chile"
 
-    // Vistas del Layout
-    private lateinit var btnCerrar: ImageButton
+    // Vistas del XML
     private lateinit var tvCantidadArticulos: TextView
-    private lateinit var containerProductos: LinearLayout // El LinearLayout para items
+    private lateinit var containerProductos: LinearLayout
     private lateinit var tvSubtotal: TextView
     private lateinit var tvEnvio: TextView
     private lateinit var tvImpuestos: TextView
     private lateinit var tvTotalEstimado: TextView
     private lateinit var tvEnvioInfo: TextView
+    private lateinit var btnCerrar: ImageButton
     private lateinit var btnEditar: TextView
     private lateinit var btnSiguiente: Button
-
-    // Lista para guardar los items
-    private val listaItemsCarrito = mutableListOf<ItemCarrito>()
 
     // Costos
     private val PAIS_LOCAL = "Chile"
     private val COSTO_ENVIO_LOCAL = 5000.0
-    private val COSTO_ENVIO_INTERNACIONAL = 25.0 // (Asumiendo 25 USD)
-    private val TASA_IMPUESTOS = 0.19 // 19%
+    private val COSTO_ENVIO_INTERNACIONAL = 25.0
+    private val TASA_IMPUESTOS = 0.19
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,13 +62,13 @@ class CarritoActivity : AppCompatActivity() {
     }
 
     private fun conectarVistas() {
-        btnCerrar = findViewById(R.id.btnCerrar)
         tvCantidadArticulos = findViewById(R.id.tvCantidadArticulos)
         containerProductos = findViewById(R.id.containerProductos)
         tvSubtotal = findViewById(R.id.tvSubtotal)
         tvEnvio = findViewById(R.id.tvEnvio)
         tvImpuestos = findViewById(R.id.tvImpuestos)
         tvTotalEstimado = findViewById(R.id.tvTotalEstimado)
+        btnCerrar = findViewById(R.id.btnCerrar)
         btnEditar = findViewById(R.id.btnEditar)
         btnSiguiente = findViewById(R.id.btnSiguiente)
         tvEnvioInfo = findViewById(R.id.tvEnvioInfo)
@@ -78,20 +76,17 @@ class CarritoActivity : AppCompatActivity() {
 
     private fun configurarBotones() {
         btnCerrar.setOnClickListener { finish() }
-        btnSiguiente.setOnClickListener {
-            Toast.makeText(this, "Iniciando pago...", Toast.LENGTH_SHORT).show()
-        }
-        btnEditar.setOnClickListener {
-            Toast.makeText(this, "Modo edición (próximamente)", Toast.LENGTH_SHORT).show()
-        }
+        btnEditar.setOnClickListener { Toast.makeText(this, "Modo edición", Toast.LENGTH_SHORT).show() }
+        btnSiguiente.setOnClickListener { Toast.makeText(this, "Iniciando pago...", Toast.LENGTH_SHORT).show() }
     }
 
     private fun cargarDatosDelCarrito() {
-        listaItemsCarrito.clear()
-        containerProductos.removeAllViews() // Limpiar vistas
+        val itemsDelCarrito = mutableListOf<ItemCarrito>()
+        containerProductos.removeAllViews()
 
         val cursor = ayudanteBD.obtenerProductosCarrito(idUsuario)
         var subtotal = 0.0
+        var cantidadTotalItems = 0
         var paisVendedor = PAIS_LOCAL
 
         if (cursor != null && cursor.moveToFirst()) {
@@ -108,60 +103,80 @@ class CarritoActivity : AppCompatActivity() {
                     nombreVendedor = cursor.getString(cursor.getColumnIndexOrThrow("nombre_vendedor")),
                     paisVendedor = cursor.getString(cursor.getColumnIndexOrThrow("pais_vendedor"))
                 )
-                listaItemsCarrito.add(item)
+                itemsDelCarrito.add(item)
                 subtotal += (item.precioProducto * item.cantidad)
+                cantidadTotalItems += item.cantidad
                 paisVendedor = item.paisVendedor
-
             } while (cursor.moveToNext())
             cursor.close()
         }
-
         ayudanteBD.close()
 
-        if (listaItemsCarrito.isEmpty()) {
+        if (itemsDelCarrito.isEmpty()) {
             tvCantidadArticulos.text = "0 artículos"
             actualizarResumenCostos(0.0, PAIS_LOCAL)
-            Toast.makeText(this, "Tu cesta está vacía", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "El carrito está vacío", Toast.LENGTH_SHORT).show()
             return
         }
 
         // Agrupar productos por vendedor
-        val productosPorVendedor = listaItemsCarrito.groupBy { it.nombreVendedor }
+        val productosPorVendedor = itemsDelCarrito.groupBy { it.nombreVendedor }
 
-        // Añadir las vistas al contenedor
+        // Mostrar productos agrupados
         for ((vendedor, productos) in productosPorVendedor) {
-            // (Aquí podrías añadir un título para el vendedor)
-            for (item in productos) {
-                agregarProductoCard(item) // <-- Llamamos la función corregida
-            }
+            agregarSeccionVendedor(vendedor, productos)
         }
 
-        tvCantidadArticulos.text = "${listaItemsCarrito.sumBy { it.cantidad }} artículo(s)"
+        tvCantidadArticulos.text = if (cantidadTotalItems == 1) "$cantidadTotalItems artículo" else "$cantidadTotalItems artículos"
         actualizarResumenCostos(subtotal, paisVendedor)
     }
 
-    // --- FUNCIÓN CORREGIDA ---
-    // Esta función infla el 'list_item_carrito.xml' y lo añade al LinearLayout
+    // Esta es tu función que tenía el error
+    private fun agregarSeccionVendedor(vendedor: String, productos: List<ItemCarrito>) {
+        val inflater = LayoutInflater.from(this)
+
+        // Agregar card del vendedor (AHORA SÍ ENCUENTRA EL LAYOUT)
+        val cardVendedor = inflater.inflate(R.layout.item_vendedor_carrito, containerProductos, false)
+        val tvNombreVendedor = cardVendedor.findViewById<TextView>(R.id.tvNombreVendedor)
+        tvNombreVendedor.text = "Vendido por: $vendedor"
+        containerProductos.addView(cardVendedor)
+
+        // Agregar cada producto del vendedor
+        for (producto in productos) {
+            agregarProductoCard(producto)
+        }
+    }
+
+    // Esta es tu otra función que tenía el error
     private fun agregarProductoCard(item: ItemCarrito) {
         val inflater = LayoutInflater.from(this)
-        // --- USA EL LAYOUT CORRECTO ---
-        val cardProducto = inflater.inflate(R.layout.list_item_carrito, containerProductos, false)
+        // (AHORA SÍ ENCUENTRA EL LAYOUT)
+        val cardProducto = inflater.inflate(R.layout.item_producto_carrito, containerProductos, false)
 
-        // Conectar vistas del 'list_item_carrito.xml'
+        // Conectar vistas del 'item_producto_carrito.xml'
+        val ivImagen = cardProducto.findViewById<ImageView>(R.id.ivProductoImagen)
         val tvMarca = cardProducto.findViewById<TextView>(R.id.tvMarcaProducto)
         val tvNombre = cardProducto.findViewById<TextView>(R.id.tvNombreProducto)
         val tvPrecio = cardProducto.findViewById<TextView>(R.id.tvPrecioProducto)
         val tvCantidad = cardProducto.findViewById<TextView>(R.id.tvCantidad)
         val tvVendedor = cardProducto.findViewById<TextView>(R.id.tvVendedorProducto)
         val btnEliminar = cardProducto.findViewById<ImageButton>(R.id.btnEliminar)
-        // (Tu 'list_item_carrito.xml' no tiene ImageView, así que no la buscamos)
 
         // Llenar datos
         tvMarca.text = item.marcaProducto.uppercase()
         tvNombre.text = item.nombreProducto
         tvPrecio.text = formatoMoneda(item.precioProducto)
         tvCantidad.text = "Cantidad: ${item.cantidad}"
-        tvVendedor.text = "Vendedor: ${item.nombreVendedor}"
+        tvVendedor.visibility = View.GONE // Ocultamos el vendedor (ya está en el título)
+
+        // Cargar imagen
+        val rutasImagenes = item.imagenProducto.split(",")
+        if (rutasImagenes.isNotEmpty() && rutasImagenes[0].isNotEmpty()) {
+            val archivoImagen = File(rutasImagenes[0])
+            if (archivoImagen.exists()) {
+                ivImagen.setImageURI(Uri.fromFile(archivoImagen))
+            }
+        }
 
         btnEliminar.setOnClickListener {
             eliminarDelCarrito(item.carritoId)
@@ -201,7 +216,6 @@ class CarritoActivity : AppCompatActivity() {
         }
 
         val total = subtotal + costoEnvio + impuestos
-
         tvSubtotal.text = formatoMoneda(subtotal)
         tvEnvio.text = formatoMoneda(costoEnvio)
         tvTotalEstimado.text = formatoMoneda(total)

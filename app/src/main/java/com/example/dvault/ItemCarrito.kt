@@ -1,7 +1,6 @@
 package models
 
-// Este objeto representa un item en el carrito,
-// incluyendo los datos del vendedor
+//guardar los datos de la consulta JOIN del carrito
 data class ItemCarrito(
     val carritoId: Int,
     val cantidad: Int,
@@ -11,5 +10,6 @@ data class ItemCarrito(
     val precioProducto: Double,
     val imagenProducto: String,
     val vendedorId: Int,
-    val nombreVendedor: String
+    val nombreVendedor: String,
+    val paisVendedor: String //
 )
