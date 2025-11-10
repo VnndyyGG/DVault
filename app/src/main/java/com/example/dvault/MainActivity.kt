@@ -1,5 +1,6 @@
 package com.example.dvault
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -42,16 +43,38 @@ class MainActivity : AppCompatActivity() {
 
             // verificar en la base de datos
             val dbHelper = SQLiteHelper(this)
-            val cursor: Cursor? = dbHelper.getUserByEmail(email)
+            val cursor: Cursor? = dbHelper.obtenerUsuarioPorEmail(email)
 
             if (cursor != null && cursor.count > 0) {
                 cursor.moveToFirst()
                 val storedPassword = cursor.getString(cursor.getColumnIndexOrThrow("password"))
+                val userId = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
+                val userName = cursor.getString(cursor.getColumnIndexOrThrow("nombre"))
+
+                // --- CAMBIO AQUÍ ---
+                // Ahora obtenemos el país en lugar de 'esVendedor'
+                val pais = cursor.getString(cursor.getColumnIndexOrThrow("pais"))
 
                 if (password == storedPassword) {
-                    // inicio de sesion
-                    Toast.makeText(this, "¡Bienvenido!", Toast.LENGTH_SHORT).show()
-                    // Aquí puedes navegar a otra pantalla si lo deseas
+                    // inicio de sesion exitoso
+                    Toast.makeText(this, "¡Bienvenido $userName!", Toast.LENGTH_SHORT).show()
+
+                    // --- CAMBIO AQUÍ ---
+                    // Guardar datos del usuario en SharedPreferences
+                    val sharedPref = getSharedPreferences("DVaultPrefs", MODE_PRIVATE)
+                    with(sharedPref.edit()) {
+                        putInt("USUARIO_ID", userId)
+                        putString("USUARIO_EMAIL", email)
+                        putString("USUARIO_NOMBRE", userName)
+                        putString("USUARIO_PAIS", pais) // <-- Guardamos el país
+                        apply()
+                    }
+
+                    // Navegar al menú principal
+                    val intent = Intent(this, MenuActivity::class.java)
+                    startActivity(intent)
+                    finish() // Cierra el login para que no pueda volver con el botón atrás
+
                 } else {
                     // Contraseña incorrecta
                     inputPassword.error = "Contraseña incorrecta"
@@ -69,8 +92,8 @@ class MainActivity : AppCompatActivity() {
 
         // Crear cuenta
         btnCreate.setOnClickListener {
-            Toast.makeText(this, "Redirigiendo a registro...", Toast.LENGTH_SHORT).show()
-            // Aquí iría la lógica para abrir la pantalla de registro
+            val intent = Intent(this, RegistroActivity::class.java)
+            startActivity(intent)
         }
 
         // Olvidaste tu contraseña?

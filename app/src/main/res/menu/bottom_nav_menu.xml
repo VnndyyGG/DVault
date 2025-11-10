@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_inicio"
+        android:icon="@android:drawable/ic_menu_view"
+        android:title="Inicio" />
+
+    <item
+        android:id="@+id/nav_descubrir"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="Descubrir" />
+
+    <item
+        android:id="@+id/nav_vender"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Vender" />
+
+    <item
+        android:id="@+id/nav_mensajes"
+        android:icon="@android:drawable/ic_dialog_email"
+        android:title="Mensajes" />
+
+    <item
+        android:id="@+id/nav_perfil"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="Perfil" />
+</menu>

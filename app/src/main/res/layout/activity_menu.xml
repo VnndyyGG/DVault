@@ -5,156 +5,164 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0E2940"
-    android:paddingStart="24dp"
-    android:paddingEnd="24dp">
+    android:background="#0A1929">
 
-    <!-- Logo D’VAULT -->
-    <TextView
-        android:id="@+id/logo"
+    <!-- Gradiente decorativo superior -->
+    <View
+        android:id="@+id/topGradient"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:fontFamily="serif"
-        android:gravity="center"
-        android:letterSpacing="0.06"
-        android:text="D’VAULT"
-        android:textAllCaps="true"
-        android:textColor="#F5EFE6"
-        android:textSize="42sp"
+        android:layout_height="200dp"
+        android:alpha="0.3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Imagen central -->
-
-    <!-- Contenedor de botones -->
-
-    <!-- Footer -->
-    <ImageView
-        android:id="@+id/imagenMenu"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="108dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_store"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logo" />
-
-    <LinearLayout
-        android:id="@+id/menu_container"
-        android:layout_width="145dp"
-        android:layout_height="116dp"
-        android:layout_marginTop="196dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-        app:layout_constraintHorizontal_bias="0.128"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imagenMenu"
-        app:layout_constraintVertical_bias="0.0">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnComprar"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="131dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="6dp"
-            android:backgroundTint="#6C00FF"
-            android:text="Comprar"
-            android:textColor="#FFFFFF"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            app:icon="@drawable/ic_cart"
-            app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            app:iconTint="#FFFFFF"
-            app:strokeWidth="0dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBuscar"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="130dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="4dp"
-            android:backgroundTint="#6C00FF"
-            android:text="Buscar"
-            android:textColor="#FFFFFF"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            app:icon="@drawable/ic_search"
-            app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            app:iconTint="#FFFFFF"
-            app:strokeWidth="0dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="148dp"
-        android:layout_height="102dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="499dp">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnVender"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="135dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="6dp"
-            android:backgroundTint="#6C00FF"
-            android:text="Vender"
-            android:textColor="#FFFFFF"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            app:icon="@drawable/ic_sell"
-            app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            app:iconTint="#FFFFFF"
-            app:strokeWidth="0dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnListar"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="135dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="6dp"
-            android:backgroundTint="#6C00FF"
-            android:text="Listar"
-            android:textColor="#FFFFFF"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            app:icon="@drawable/ic_list"
-            app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            app:iconTint="#FFFFFF"
-            app:strokeWidth="0dp" />
-
-    </LinearLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSalir"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+    <!-- Logo/Título -->
+    <TextView
+        android:id="@+id/tvLogo"
         android:layout_width="wrap_content"
-        android:layout_height="36dp"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="#C42B2B"
-        android:text="Salir"
-        android:textColor="#0E2940"
-        android:textSize="13sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:fontFamily="serif"
+        android:letterSpacing="0.15"
+        android:text="D'VAULT"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
         android:textStyle="bold"
-        app:icon="@drawable/ic_exit"
-        app:iconGravity="textStart"
-        app:iconPadding="8dp"
-        app:iconTint="#0E2940"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Subtítulo -->
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:alpha="0.8"
+        android:letterSpacing="0.3"
+        android:text="FASHION MARKETPLACE"
+        android:textColor="#D4AF37"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLogo" />
+
+    <!-- Contenedor de botones principales -->
+    <LinearLayout
+        android:id="@+id/mainButtonsContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/secondaryButtonsContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <Button
+            android:id="@+id/btnComprar"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="60dp"
+            android:drawablePadding="12dp"
+            android:elevation="8dp"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:background="@drawable/btn_primary"
+            android:text="COMPRAR"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- Botón Vender -->
+        <Button
+            android:id="@+id/btnVender"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_primary"
+            android:letterSpacing="0.1"
+            android:text="VENDER"
+            android:textColor="#D4AF37"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- Contenedor de botones secundarios -->
+    <LinearLayout
+        android:id="@+id/secondaryButtonsContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/btnSalir"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainButtonsContainer">
+
+        <!-- Botón Buscar -->
+        <Button
+            style="@style/ButtonStyle"
+            android:id="@+id/btnBuscar"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_secondary"
+            android:backgroundTint="@null"
+            android:letterSpacing="0.05"
+            android:text="BUSCAR"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            />
+
+        <!-- Botón Listar -->
+        <Button
+            android:id="@+id/btnListar"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_secondary"
+            android:letterSpacing="0.05"
+            android:text="LISTAR"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <!-- Botón Salir -->
+    <Button
+        android:id="@+id/btnSalir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:letterSpacing="0.1"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:text="SALIR"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:background="@drawable/btn_tercero"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.96"
-        app:layout_constraintStart_toStartOf="parent"
-        app:strokeWidth="0dp" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Decoración inferior -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:alpha="0.2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

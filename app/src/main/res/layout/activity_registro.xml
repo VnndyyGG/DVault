@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A1929"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Crear Cuenta"
+        android:textColor="#F5EFE6"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="352dp"
+        android:layout_height="477dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitulo">
+
+        <!-- Campo Nombre -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#0F3246"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="0dp">
+
+            <EditText
+                android:id="@+id/inputNombre"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:hint="Nombre de usuario"
+                android:inputType="text"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:textColor="#C7D3DA"
+                android:textColorHint="#7E98A6" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Campo Email -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#0F3246"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="0dp">
+
+            <EditText
+                android:id="@+id/inputEmail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:hint="Correo electrónico"
+                android:inputType="textEmailAddress"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:textColor="#C7D3DA"
+                android:textColorHint="#7E98A6" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Campo Password -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#0F3246"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="0dp">
+
+
+            <EditText
+                android:id="@+id/inputPassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:hint="Contraseña"
+                android:inputType="textPassword"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:textColor="#C7D3DA"
+                android:textColorHint="#7E98A6" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="#0F3246"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="0dp">
+
+            <EditText
+                android:id="@+id/inputTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:hint="Teléfono (Ej: 912345678)"
+                android:inputType="phone"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:textColor="#C7D3DA"
+                android:textColorHint="#7E98A6" />
+
+        </androidx.cardview.widget.CardView>
+
+
+        <EditText
+            android:id="@+id/inputPais"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="País (Ej: Chile)"
+            android:inputType="textCapWords"
+            android:backgroundTint="#D4AF37"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#4A5A64"
+            android:layout_marginTop="16dp" />
+
+        <!-- Botón Registrar -->
+        <Button
+            android:id="@+id/btnRegistrar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/btn_primary"
+            android:text="REGISTRAR"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- Ya tienes cuenta -->
+        <TextView
+            android:id="@+id/tvYaTienesCuenta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="¿Ya tienes cuenta? Inicia sesión"
+            android:textColor="#D4AF37"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
