@@ -100,8 +100,7 @@ class RegistroActivity : AppCompatActivity() {
 
             // --- 4. FIN DE VALIDACIONES ---
 
-            // --- LLAMADA CORREGIDA ---
-            // Si todo está bien, insertar en la BD
+            //Si todo está bien se insertar en la Base de datos
             val exito = dbHelper.insertarUsuario(nombre, email, password, pais, telefono) // <-- 'telefono' AÑADIDO
 
             if (exito != -1L) {
