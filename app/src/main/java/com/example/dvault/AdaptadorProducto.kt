@@ -19,6 +19,7 @@ class AdaptadorProducto(
     // Interfaz para manejar clicks
     interface AlPulsarProductoListener {
         fun alPulsarAgregarAlCarrito(producto: Producto)
+        fun alPulsarFavorito(producto: Producto)
     }
 
     inner class ProductoViewHolder(vista: View) : RecyclerView.ViewHolder(vista) {
@@ -27,7 +28,8 @@ class AdaptadorProducto(
         val tvPrecio: TextView = vista.findViewById(R.id.tvPrecio)
         val tvUbicacion: TextView = vista.findViewById(R.id.tvUbicacion)
         val tvTalla: TextView = vista.findViewById(R.id.tvTalla)
-        val btnAgregarCarrito: ImageButton = vista.findViewById(R.id.btnFavorito)
+        val btnFavorito: ImageButton = vista.findViewById(R.id.btnFavorito)
+        val btnAgregarCarrito: ImageButton = vista.findViewById(R.id.btnAgregarCarrito)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductoViewHolder {
@@ -44,15 +46,21 @@ class AdaptadorProducto(
         holder.tvUbicacion.text = "Santiago, Chile"
         holder.tvTalla.text = "TU" // Talla única
 
+        // Click en el botón de favorito (corazón/estrella)
+        holder.btnFavorito.setOnClickListener {
+            oyente.alPulsarFavorito(producto)
+        }
 
-
-        // Click en agregar al carrito
+        // Click en el botón de agregar al carrito
         holder.btnAgregarCarrito.setOnClickListener {
             oyente.alPulsarAgregarAlCarrito(producto)
         }
 
         // Click en el producto completo (para ver detalles)
         holder.itemView.setOnClickListener {
+            val intent = android.content.Intent(contexto, ProductoDetalleActivity::class.java)
+            intent.putExtra("PRODUCTO_ID", producto.id)
+            contexto.startActivity(intent)
         }
     }
 

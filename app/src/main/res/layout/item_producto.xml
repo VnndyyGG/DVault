@@ -81,14 +81,31 @@
                 app:layout_constraintTop_toBottomOf="@id/tvPrecio"
                 tools:text="Located in Asia" />
 
-            <!-- Botón favorito -->
+            <!-- Botón favorito (corazón) -->
             <ImageButton
                 android:id="@+id/btnFavorito"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@android:color/transparent"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Añadir a favoritos"
-                android:src="@drawable/ic_heart"
+                android:src="@android:drawable/btn_star_big_off"
+                android:scaleType="fitCenter"
+                android:padding="4dp"
+                app:tint="#D4AF37"
+                app:layout_constraintEnd_toStartOf="@id/btnAgregarCarrito"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <!-- Botón agregar al carrito -->
+            <ImageButton
+                android:id="@+id/btnAgregarCarrito"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Añadir al carrito"
+                android:src="@android:drawable/ic_menu_add"
+                android:scaleType="fitCenter"
+                android:padding="6dp"
                 app:tint="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
