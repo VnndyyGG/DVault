@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/rootLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A1929">
+
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_revert"
+            android:tint="#FFFFFF"
+            android:contentDescription="Volver" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mi Perfil"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+        <View
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- Avatar y nombre -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingBottom="24dp">
+
+                <!-- Avatar circular -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="50dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#0F3246">
+
+                    <TextView
+                        android:id="@+id/tvAvatarInicial"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="A"
+                        android:textColor="#D4AF37"
+                        android:textSize="48sp"
+                        android:textStyle="bold"
+                        android:fontFamily="serif" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tvNombreUsuario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Usuario"
+                    android:textColor="#F5EFE6"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <!-- Calificación promedio -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tvPromedioEstrellas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5.0"
+                        android:textColor="#D4AF37"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" ★"
+                        android:textColor="#D4AF37"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tvCantidadCalificaciones"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="(0 calificaciones)"
+                        android:textColor="#7E98A6"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Card de información personal -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#0F3246"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="INFORMACIÓN PERSONAL"
+                        android:textColor="#7E98A6"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.1"
+                        android:paddingBottom="12dp" />
+
+                    <!-- Email -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Email"
+                            android:textColor="#7E98A6"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tvEmail"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="usuario@email.com"
+                            android:textColor="#C7D3DA"
+                            android:textSize="14sp"
+                            android:gravity="end" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#1A2A3A" />
+
+                    <!-- Teléfono -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Teléfono"
+                            android:textColor="#7E98A6"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tvTelefono"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="+56 9 1234 5678"
+                            android:textColor="#C7D3DA"
+                            android:textSize="14sp"
+                            android:gravity="end" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#1A2A3A" />
+
+                    <!-- País -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="País"
+                            android:textColor="#7E98A6"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tvPais"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:text="Chile"
+                            android:textColor="#C7D3DA"
+                            android:textSize="14sp"
+                            android:gravity="end" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Card de calificaciones como vendedor -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#0F3246"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CALIFICACIONES COMO VENDEDOR"
+                        android:textColor="#7E98A6"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.1"
+                        android:paddingBottom="12dp" />
+
+                    <!-- Distribución de estrellas -->
+                    <LinearLayout
+                        android:id="@+id/layoutDistribucionEstrellas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- 5 Estrellas -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingVertical="4dp">
+
+                            <TextView
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:text="5 ★"
+                                android:textColor="#C7D3DA"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:id="@+id/barra5Estrellas"
+                                android:layout_width="0dp"
+                                android:layout_height="8dp"
+                                android:layout_weight="1"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:background="#D4AF37" />
+
+                            <TextView
+                                android:id="@+id/tvCantidad5"
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="#7E98A6"
+                                android:textSize="14sp"
+                                android:gravity="end" />
+                        </LinearLayout>
+
+                        <!-- 4 Estrellas -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingVertical="4dp">
+
+                            <TextView
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:text="4 ★"
+                                android:textColor="#C7D3DA"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:id="@+id/barra4Estrellas"
+                                android:layout_width="0dp"
+                                android:layout_height="8dp"
+                                android:layout_weight="1"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:background="#1A2A3A" />
+
+                            <TextView
+                                android:id="@+id/tvCantidad4"
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="#7E98A6"
+                                android:textSize="14sp"
+                                android:gravity="end" />
+                        </LinearLayout>
+
+                        <!-- 3 Estrellas -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingVertical="4dp">
+
+                            <TextView
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:text="3 ★"
+                                android:textColor="#C7D3DA"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:id="@+id/barra3Estrellas"
+                                android:layout_width="0dp"
+                                android:layout_height="8dp"
+                                android:layout_weight="1"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:background="#1A2A3A" />
+
+                            <TextView
+                                android:id="@+id/tvCantidad3"
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="#7E98A6"
+                                android:textSize="14sp"
+                                android:gravity="end" />
+                        </LinearLayout>
+
+                        <!-- 2 Estrellas -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingVertical="4dp">
+
+                            <TextView
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:text="2 ★"
+                                android:textColor="#C7D3DA"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:id="@+id/barra2Estrellas"
+                                android:layout_width="0dp"
+                                android:layout_height="8dp"
+                                android:layout_weight="1"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:background="#1A2A3A" />
+
+                            <TextView
+                                android:id="@+id/tvCantidad2"
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="#7E98A6"
+                                android:textSize="14sp"
+                                android:gravity="end" />
+                        </LinearLayout>
+
+                        <!-- 1 Estrella -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingVertical="4dp">
+
+                            <TextView
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:text="1 ★"
+                                android:textColor="#C7D3DA"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:id="@+id/barra1Estrella"
+                                android:layout_width="0dp"
+                                android:layout_height="8dp"
+                                android:layout_weight="1"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:background="#1A2A3A" />
+
+                            <TextView
+                                android:id="@+id/tvCantidad1"
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="#7E98A6"
+                                android:textSize="14sp"
+                                android:gravity="end" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Lista de comentarios recientes -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardComentarios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#0F3246"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="COMENTARIOS RECIENTES"
+                        android:textColor="#7E98A6"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.1"
+                        android:paddingBottom="12dp" />
+
+                    <LinearLayout
+                        android:id="@+id/containerComentarios"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Los comentarios se agregarán dinámicamente aquí -->
+                        <TextView
+                            android:id="@+id/tvSinComentarios"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Aún no tienes calificaciones"
+                            android:textColor="#7E98A6"
+                            android:textSize="14sp"
+                            android:gravity="center"
+                            android:padding="16dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

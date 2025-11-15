@@ -167,6 +167,18 @@ class ComprarActivity : AppCompatActivity(), AdaptadorProducto.AlPulsarProductoL
         }
     }
 
+    override fun alPulsarFavorito(producto: Producto) {
+        val db = SQLiteHelper(this)
+        if (db.esFavorito(idUsuario, producto.id)) {
+            db.eliminarDeFavoritos(idUsuario, producto.id)
+            Toast.makeText(this, "Eliminado de favoritos", Toast.LENGTH_SHORT).show()
+        } else {
+            db.agregarAFavoritos(idUsuario, producto.id)
+            Toast.makeText(this, "${producto.nombre} agregado a favoritos ❤️", Toast.LENGTH_SHORT).show()
+        }
+        db.close()
+    }
+
     override fun onResume() {
         super.onResume()
         // Recargamos los productos cada vez que volvemos a esta pantalla

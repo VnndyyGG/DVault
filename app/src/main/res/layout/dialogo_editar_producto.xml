@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#0A1929">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Editar Producto"
+            android:textColor="#F5EFE6"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingBottom="16dp" />
+
+        <!-- Marca -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Marca"
+            android:textColor="#7E98A6"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/etMarca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/btn_secondary"
+            android:padding="12dp"
+            android:textColor="#C7D3DA"
+            android:textColorHint="#7E98A6"
+            android:hint="Ej: Gucci" />
+
+        <!-- Nombre -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre"
+            android:textColor="#7E98A6"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
+
+        <EditText
+            android:id="@+id/etNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/btn_secondary"
+            android:padding="12dp"
+            android:textColor="#C7D3DA"
+            android:textColorHint="#7E98A6"
+            android:hint="Ej: Riñonera de Cuero" />
+
+        <!-- Precio -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precio"
+            android:textColor="#7E98A6"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
+
+        <EditText
+            android:id="@+id/etPrecio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/btn_secondary"
+            android:padding="12dp"
+            android:textColor="#C7D3DA"
+            android:textColorHint="#7E98A6"
+            android:hint="Ej: 100000"
+            android:inputType="numberDecimal" />
+
+        <!-- Descripción -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción"
+            android:textColor="#7E98A6"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
+
+        <EditText
+            android:id="@+id/etDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/btn_secondary"
+            android:padding="12dp"
+            android:textColor="#C7D3DA"
+            android:textColorHint="#7E98A6"
+            android:hint="Describe tu producto..."
+            android:gravity="top"
+            android:inputType="textMultiLine" />
+
+        <!-- Botones -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp">
+
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/btn_tercero"
+                android:text="CANCELAR"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnGuardar"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/btn_primary"
+                android:text="GUARDAR"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#0A1929">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Crear Oferta Temporal"
+        android:textColor="#F5EFE6"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reduce el precio por tiempo limitado"
+        android:textColor="#7E98A6"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:paddingBottom="24dp" />
+
+    <!-- Precio actual -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingVertical="12dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Precio actual:"
+            android:textColor="#7E98A6"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvPrecioActual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$100.000"
+            android:textColor="#C7D3DA"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Nuevo precio de oferta -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nuevo precio (oferta)"
+        android:textColor="#7E98A6"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp" />
+
+    <EditText
+        android:id="@+id/etPrecioOferta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/btn_secondary"
+        android:padding="12dp"
+        android:textColor="#D4AF37"
+        android:textColorHint="#7E98A6"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:hint="Ej: 80000"
+        android:inputType="numberDecimal" />
+
+    <!-- Duración de la oferta -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Duración de la oferta"
+        android:textColor="#7E98A6"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupDuracion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <RadioButton
+            android:id="@+id/radio1Hora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1 hora"
+            android:textColor="#C7D3DA"
+            android:textSize="16sp"
+            android:paddingVertical="8dp"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/radio3Horas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3 horas"
+            android:textColor="#C7D3DA"
+            android:textSize="16sp"
+            android:paddingVertical="8dp" />
+
+        <RadioButton
+            android:id="@+id/radio6Horas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="6 horas"
+            android:textColor="#C7D3DA"
+            android:textSize="16sp"
+            android:paddingVertical="8dp" />
+
+        <RadioButton
+            android:id="@+id/radio12Horas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="12 horas"
+            android:textColor="#C7D3DA"
+            android:textSize="16sp"
+            android:paddingVertical="8dp" />
+
+        <RadioButton
+            android:id="@+id/radio24Horas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="24 horas (1 día)"
+            android:textColor="#C7D3DA"
+            android:textSize="16sp"
+            android:paddingVertical="8dp" />
+    </RadioGroup>
+
+    <!-- Botones -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="24dp">
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/btn_tercero"
+            android:text="CANCELAR"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnCrearOferta"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/btn_primary"
+            android:text="CREAR OFERTA"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -16,6 +16,8 @@ class MenuActivity : AppCompatActivity() {
         val btnVender = findViewById<Button>(R.id.btnVender)
         val btnBuscar = findViewById<Button>(R.id.btnBuscar)
         val btnListar = findViewById<Button>(R.id.btnListar)
+        val btnFavoritos = findViewById<Button>(R.id.btnFavoritos)
+        val btnPerfil = findViewById<Button>(R.id.btnPerfil)
         val btnSalir = findViewById<Button>(R.id.btnSalir)
 
         // Botón COMPRAR
@@ -39,6 +41,18 @@ class MenuActivity : AppCompatActivity() {
         // Botón LISTAR
         btnListar.setOnClickListener {
             val intent = Intent(this, ListarActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Botón FAVORITOS
+        btnFavoritos.setOnClickListener {
+            val intent = Intent(this, FavoritosActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Botón PERFIL
+        btnPerfil.setOnClickListener {
+            val intent = Intent(this, PerfilActivity::class.java)
             startActivity(intent)
         }
 
